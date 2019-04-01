@@ -117,7 +117,7 @@
 			let toArr = inputStr.split('')
 			// toArr.unshift('')
 			toArr = toArr.map((val,index)=>(
-				`${one.val()}(${Number(two.val())+Number(three.val()*index)},${Number(two.val())+Number(three.val()*(index+1))}),${four.val()}${val}`	
+				`${one.val()}(${Number(two.val())+Number(three.val()*index)},${Number(two.val())+Number(three.val()*(index+1))},${four.val()}${val}`	
 			))
 			const outputStr = toArr.join('')
 			output.val( outputStr )
