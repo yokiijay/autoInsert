@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="https://i.loli.net/2019/04/01/5ca178f007d13.png">
+	<link href="https://cdn.bootcss.com/minireset.css/0.0.2/minireset.min.css" rel="stylesheet">
+	<title>原来在字间插内容这么简单</title>
+	<style>
+		html,body {
+			font-family: 'PingFang Sc', Arial, Helvetica, sans-serif;
+			background: #252525;
+			color: white;
+		}
+		.box {
+			height: 100vh;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			position: relative;
+		}
+		.input textarea {
+			margin: 0 20px;
+			margin-bottom: 40px;
+		}
+		.control {
+			display: flex;
+			color: lightgray;
+		}
+		.control input {
+			margin: 0 20px;
+			background: none;
+			color: white;
+			padding: 0 4px;
+			border: none;
+			border-bottom: 1px solid rgba(255,255,255,.4);
+		}
+		input:focus {
+			/* outline-color: #dd2277; */
+			outline: none;
+			border-bottom-color: #dd2277;
+		}
+		.box h1 {
+			position: relative;
+			bottom: 4%;
+			font-size: 2em;
+			font-weight: bolder;
+			background: #dd2277;
+			color: white;
+			padding: 2px 30px;
+			box-shadow: 5px 5px 0 #bb17614d;
+			cursor: default;
+			transition: all .1s;
+		}
+		.box h1:hover {
+			animation: shake .1s ease-in-out infinite alternate;
+		}
+		@keyframes shake {
+			from { transform: rotate(5deg) }
+			to { transform: rotate(-5deg) }
+		}
+
+		textarea {
+			padding: 4px;
+			background: none;
+		}
+		textarea:first-child {
+			border-color: #dd2277;
+			color: #dd2277;
+			outline: none;
+		}
+		textarea:last-child {
+			border-color: royalblue;
+			color: royalblue;
+			cursor: pointer;
+		}
+		textarea:last-child::selection {
+			background: white;
+		}
+	</style>
+</head>
+<body>
+	<article class="box">
+		<h1>原来在字间插内容这么简单</h1>
+		<div class="input">
+			<textarea cols="30" rows="14" placeholder="随便写点什么"></textarea>
+			<textarea cols="44" rows="14" placeholder="输出在这里，单击复制" readonly></textarea>
+		</div>
+		<div class="control">
+			<span>常量A</span><input type="text" value="{\alpha&HFF&\t">
+			<span>初始量</span><input type="number" placeholder="输入初始量" value="200">
+			<span>增量</span><input type="number" placeholder="输入增量" value="200">
+			<span>常量B</span><input type="text" value="\alpha&H00&)}">
+		</div>
+		<footer style="position: absolute; bottom: 2vh;">
+			<code>
+				Directed by Yokiijay
+			</code>
+		</footer>
+	</article>
+
+	<!-- js👇 -->
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+		// 获取dom元素
+		const input = $('.input textarea').eq(0)
+		const output = $('.input textarea').eq(1)
+		const one = $('.control input').eq(0)
+		const two = $('.control input').eq(1)
+		const three = $('.control input').eq(2)
+		const four = $('.control input').eq(3)
+
+		input.on('input', function(){
+			const inputStr = input.val()
+			let toArr = inputStr.split('')
+			// toArr.unshift('')
+			toArr = toArr.map((val,index)=>(
+				`${one.val()}(${Number(two.val())+Number(three.val()*index)},${Number(two.val())+Number(three.val()*(index+1))}),${four.val()}${val}`	
+			))
+			const outputStr = toArr.join('')
+			output.val( outputStr )
+		})
+
+		output.click(function (){
+			$(this).select()
+			document.execCommand('Copy')
+			alert('已复制')
+		})
+	</script>
+</body>
+</html>
