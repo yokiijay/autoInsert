@@ -89,10 +89,10 @@
 			<textarea cols="44" rows="14" placeholder="输出在这里，单击复制" readonly></textarea>
 		</div>
 		<div class="control">
-			<span>常量A</span><input type="text" value="{\alpha&HFF&\t">
+			<span>常量A</span><input type="text" value="{\alpha&HFF&\t(">
 			<span>初始量</span><input type="number" placeholder="输入初始量" value="200">
 			<span>增量</span><input type="number" placeholder="输入增量" value="200">
-			<span>常量B</span><input type="text" value="\alpha&H00&)}">
+			<span>常量B</span><input type="text" value=",\alpha&H00&)}">
 		</div>
 		<footer style="position: absolute; bottom: 2vh;">
 			<code>
@@ -117,7 +117,7 @@
 			let toArr = inputStr.split('')
 			// toArr.unshift('')
 			toArr = toArr.map((val,index)=>(
-				`${one.val()}(${Number(two.val())+Number(three.val()*index)},${Number(two.val())+Number(three.val()*(index+1))},${four.val()}${val}`	
+				`${one.val()}${Number(two.val())+Number(three.val()*index)},${Number(two.val())+Number(three.val()*(index+1))}${four.val()}${val}`	
 			))
 			const outputStr = toArr.join('')
 			output.val( outputStr )
