@@ -56,12 +56,15 @@
 			cursor: default;
 			transition: all .1s;
 		}
+		.box h1 {
+			animation: shake 1s ease-in-out infinite alternate;
+		}
 		.box h1:hover {
-			animation: shake .1s ease-in-out infinite alternate;
+			animation: none;
 		}
 		@keyframes shake {
-			from { transform: rotate(5deg) }
-			to { transform: rotate(-5deg) }
+			from { transform: rotate(-3deg); transform-origin: left top; }
+			to { transform: rotate(3deg); transform-origin: right top; }
 		}
 
 		textarea {
